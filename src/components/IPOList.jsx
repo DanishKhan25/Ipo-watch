@@ -8,7 +8,7 @@ function IPOList({ data }) {
             <th className="border border-black px-4 py-2">Company Name</th>
             <th className="border border-black px-4 py-2">URL</th>
             <th className="border border-black px-4 py-2">Symbol</th>
-            <th className="border border-black px-4 py-2">Industry</th>
+            <th className="border border-black px-4 py-2">Issue size</th>
             <th className="border border-black px-4 py-2">IPO Type</th>
             <th className="border border-black px-4 py-2">QIB Sub</th>
             <th className="border border-black px-4 py-2">Listing Date</th>
@@ -16,6 +16,7 @@ function IPOList({ data }) {
             <th className="border border-black px-4 py-2">Last Price</th>
             <th className="border border-black px-4 py-2">Listing Open</th>
             <th className="border border-black px-4 py-2">Listing Close</th>
+            <th className="border border-black px-4 py-2">Todays Gain</th>
           </tr>
         </thead>
         <tbody>
@@ -25,23 +26,24 @@ function IPOList({ data }) {
                 {ipo.company_name || "N/A"}
               </td>
               <td
-                className="border border-black px-4 py-2 max-w-32 text-blue text-ellipsis overflow-hidden"
+                className="border border-black px-4 py-2 max-w-50 text-blue-500 text-ellipsis overflow-hidden"
                 style={{ wordWrap: "break-word" }}
               >
                 <a
-                  className="max-w-32 overflow-hidden text-ellipsis text-blue"
-                  href={ipo.url}
+                  className="text-blue-500 text-ellipsis overflow-hidden max-w-50"
+                  href={`https://www.moneycontrol.com/india/stockpricequote/${ipo.url}`}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  {ipo.url || "N/A"}
+                  {`https://www.moneycontrol.com/india/stockpricequote/${ipo.url}` ||
+                    "N/A"}
                 </a>
               </td>
               <td className="border border-black px-4 py-2">
                 <a href={ipo.url}>{ipo.company_code || "N/A"}</a>
               </td>
               <td className="border border-black px-4 py-2">
-                {ipo.industry || "N/A"}
+                {(ipo.issue_size / 10000000).toFixed(2) || "N/A"}
               </td>
               <td className="border border-black px-4 py-2">
                 {ipo.ipo_type || "N/A"}
@@ -67,6 +69,9 @@ function IPOList({ data }) {
               </td>
               <td className="border border-black px-4 py-2">
                 {ipo.dt_close || "N/A"}
+              </td>
+              <td className="border border-black px-4 py-2">
+                {ipo.todays_gain?.toFixed(2) || "N/A"}
               </td>
             </tr>
           ))}
